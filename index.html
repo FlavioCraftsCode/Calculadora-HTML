@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .fundo {
+            background: linear-gradient(to bottom, orange, black);
+            height: 100vh;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        .Calculadora {
+            position: absolute;
+            background-color: black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .botao {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            margin: 5px;
+            border-radius: 5px;
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .botao:hover {
+            background-color: #333;
+        }
+        #resultado {
+            background-color: white;
+            color: black;
+            font-size: 25px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 300px;
+            height: 30px;
+            text-align: right;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fundo">
+        <h1>FGN Agência</h1>
+        <div class="Calculadora">
+            <h1>Calculadora</h1>
+            <input type="text" id="resultado" disabled>
+            <p id="Resultado"></p>
+            
+            <!-- Botões da calculadora -->
+            <div>
+                <button class="botao" onclick="insert('7')">7</button>
+                <button class="botao" onclick="insert('8')">8</button>
+                <button class="botao" onclick="insert('9')">9</button>
+                <button class="botao" onclick="clearLast()">C</button>
+            </div>
+            <div>
+                <button class="botao" onclick="insert('4')">4</button>
+                <button class="botao" onclick="insert('5')">5</button>
+                <button class="botao" onclick="insert('6')">6</button>
+                <button class="botao" onclick="insert('*')">*</button>
+            </div>
+            <div>
+                <button class="botao" onclick="insert('1')">1</button>
+                <button class="botao" onclick="insert('2')">2</button>
+                <button class="botao" onclick="insert('3')">3</button>
+                <button class="botao" onclick="insert('-')">-</button>
+            </div>
+            <div>
+                <button class="botao zero" onclick="insert('0')">0</button>
+                <button class="botao ponto" onclick="insert('.')">.</button>
+                <button class="botao igual" onclick="calculate()">=</button>
+                <button class="botao" onclick="insert('+')">+</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let expression = '';
+
+        function insert(num) {
+            expression += num;
+            document.getElementById('resultado').value = expression;
+        }
+
+        function calculate() {
+            try {
+                const result = eval(expression);
+                document.getElementById('resultado').value = result;
+                expression = result.toString();
+            } catch (error) {
+                document.getElementById('resultado').value = 'Erro';
+                expression = '';
+            }
+        }
+
+        function clearLast() {
+            expression = expression.slice(0, -1); 
+            document.getElementById('resultado').value = expression;
+        }
+    </script>
+</body>
+</html>
